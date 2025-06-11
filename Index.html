@@ -64,17 +64,26 @@
   #fullImage.visible {
     opacity: 1;
     visibility: visible;
-    animation: lightGlow 2s ease-out forwards;
+    animation: pixelMagic 2.2s ease-out forwards;
   }
 
-  @keyframes lightGlow {
+  @keyframes pixelMagic {
     0% {
-      filter: brightness(2.5) blur(2px);
-      transform: scale(1.02);
+      opacity: 0;
+      transform: scale(0.8) rotate(10deg);
+      filter: brightness(3) blur(8px);
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+    50% {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      transform: scale(1.05) rotate(-5deg);
+      filter: brightness(1.8) blur(3px);
     }
     100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
       filter: brightness(1) blur(0);
-      transform: scale(1);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
   }
 
