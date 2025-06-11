@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Caccia al tesoro - Sblocca immagine con dissolvenza</title>
+<title>Caccia al tesoro - Dissolvenza immagine</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -13,12 +13,35 @@
     background: #f9f9f9;
   }
 
-  img {
+  .image-container {
+    position: relative;
+    display: inline-block;
     max-width: 90vw;
-    height: auto;
+  }
+
+  /* immagine parziale visibile subito */
+  #partialImage {
+    max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    margin-bottom: 20px;
+  }
+
+  /* immagine completa sovrapposta, invisibile inizialmente */
+  #fullImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease;
+  }
+
+  #fullImage.visible {
+    opacity: 1;
+    visibility: visible;
   }
 
   input[type="text"] {
@@ -28,6 +51,7 @@
     max-width: 300px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    margin-top: 20px;
     margin-bottom: 10px;
   }
 
@@ -52,25 +76,16 @@
     color: #333;
     min-height: 1.5em;
   }
-
-  /* Dissolvenza per l'immagine completa */
-  #fullImage {
-    display: none;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-  }
-  #fullImage.visible {
-    display: inline-block; /* serve a mostrare */
-    opacity: 1;
-  }
 </style>
 </head>
 <body>
 
 <h2>Indovina per sbloccare l'immagine completa</h2>
 
-<img id="partialImage" src="immagine_parziale.jpg" alt="Immagine parziale" />
-<img id="fullImage" src="immagine_completa.jpg" alt="Immagine completa" />
+<div class="image-container">
+  <img id="partialImage" src="immagine_parziale.jpg" alt="Immagine parziale" />
+  <img id="fullImage" src="immagine_completa.jpg" alt="Immagine completa" />
+</div>
 
 <br>
 
@@ -86,16 +101,11 @@
     const correctAnswer = 'tesoro'; // Cambia con la risposta corretta
 
     if (userAnswer === correctAnswer) {
-      document.getElementById('partialImage').style.display = 'none';
-
       const fullImg = document.getElementById('fullImage');
-      // rimuovo display:none iniziale per far partire la transizione
-      fullImg.style.display = 'inline-block';
-
-      // forzo repaint per avviare la transizione
-      void fullImg.offsetWidth;
-
       fullImg.classList.add('visible');
+
+      // opzionale: nascondi immagine parziale per vedere meglio
+      // document.getElementById('partialImage').style.visibility = 'hidden';
 
       document.getElementById('feedback').textContent = 'Bravo! Hai sbloccato l’immagine completa.';
     } else {
