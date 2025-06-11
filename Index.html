@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Caccia al tesoro - Magia!</title>
 
-<!-- Font Harry Potter -->
+<!-- Font Harry Potter (locale) -->
 <style>
 @font-face {
   font-family: 'HarryP';
-  src: url('https://cdn.jsdelivr.net/gh/hiukim/harry-potter-font@master/HARRYP__.woff') format('woff');
+  src: url('harry-p-font.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -139,18 +139,14 @@
 <script>
   function checkAnswer() {
     const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
-    const correctAnswer = 'vecchia miniera'; // Cambia la risposta se vuoi
+    const correctAnswer = 'vecchia miniera';
 
     if (userAnswer === correctAnswer) {
       const fullImg = document.getElementById('fullImage');
       fullImg.classList.add('visible');
 
-      // facoltativo: nascondere l'immagine parziale sotto
-      // document.getElementById('partialImage').style.visibility = 'hidden';
-
       document.getElementById('feedback').textContent = 'Incanto riuscito! Hai sbloccato l’immagine magica.';
 
-      // riproduci il suono magico
       const sound = document.getElementById('magicSound');
       sound.currentTime = 0;
       sound.play();
