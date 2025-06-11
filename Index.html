@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Caccia al tesoro - Sblocca immagine</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    text-align: center;
+    background: #f9f9f9;
+  }
+
+  img {
+    max-width: 90vw;  /* larghezza massima al 90% della viewport */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    width: 80%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  #feedback {
+    font-weight: bold;
+    margin-top: 15px;
+    color: #333;
+    min-height: 1.5em;
+  }
+</style>
+</head>
+<body>
+
+<h2>Indovina per sbloccare l'immagine completa</h2>
+
+<img id="partialImage" src="immagine_parziale.jpg" alt="Immagine parziale" />
+<img id="fullImage" src="immagine_completa.jpg" alt="Immagine completa" style="display:none;" />
+
+<br>
+
+<input type="text" id="answer" placeholder="Inserisci la risposta" autocomplete="off" />
+<br>
+<button onclick="checkAnswer()">Verifica</button>
+
+<p id="feedback"></p>
+
+<script>
+  function checkAnswer() {
+    const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+    const correctAnswer = 'tesoro'; // Cambia con la risposta corretta
+
+    if (userAnswer === correctAnswer) {
+      document.getElementById('partialImage').style.display = 'none';
+      document.getElementById('fullImage').style.display = 'inline-block';
+      document.getElementById('feedback').textContent = 'Bravo! Hai sbloccato l’immagine completa.';
+    } else {
+      document.getElementById('feedback').textContent = 'Risposta errata, riprova.';
+    }
+  }
+</script>
+
+</body>
+</html>
